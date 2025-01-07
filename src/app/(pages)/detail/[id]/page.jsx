@@ -1,8 +1,47 @@
 import React from "react";
 import { getProductById } from "../../action/productServices";
 
-// viet function call API => server action
+// Hàm generateMetadata
+export async function generateMetadata({ params }) {
+  const { id } = params;
 
+  // Gọi API để lấy thông tin sản phẩm
+  const product = await getProductById(id);
+
+  // Kiểm tra nếu không có sản phẩm
+  if (!product) {
+    return {
+      title: "Product Not Found",
+      description: "The product you are looking for does not exist.",
+    };
+  }
+
+  return {
+    title: product.name || "Product Details",
+    description: product.description || "Explore our product details.",
+    openGraph: {
+      title: product.name || "Product Details",
+      description: product.description || "Explore our product details.",
+      url: `https://yourwebsite.com/product/${id}`,
+      images: [
+        {
+          url: product.image || "/placeholder.jpg",
+          width: 800,
+          height: 600,
+          alt: product.name || "Product Image",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name || "Product Details",
+      description: product.description || "Explore our product details.",
+      images: [product.image || "/placeholder.jpg"],
+    },
+  };
+}
+
+// viet function call API => server action
 const page = async (props) => {
   // const test = await props.params;
   // console.log("test: ", test); // {id: '2'}
