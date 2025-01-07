@@ -32,6 +32,7 @@ export default function RootLayout({ children }) {
           // referrerpolicy="no-referrer"
           referrerPolicy="no-referrer"
         />
+        <link rel="canonical" href="https://next-js-rho-gray.vercel.app/" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
