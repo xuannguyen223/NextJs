@@ -22,10 +22,24 @@ export const getAllProducts = async (keyword) => {
 // viet function call API => server action
 export const getProductById = async (id) => {
   try {
-    const response = await axios.get(
-      `https://apistore.cybersoft.edu.vn/api/Product/getid?id=${id}`
+    // dung axios
+    // const response = await axios.get(
+    //   `https://apistore.cybersoft.edu.vn/api/Product/getid?id=${id}`
+    // );
+    // return response.data.content;
+
+    // dung fetch
+    const response = await fetch(
+      `https://apistore.cybersoft.edu.vn/api/Product/getid?id=${id}`,
+      {
+        next: {
+          revalidate: 10, // trong vong 10s se ko call lai API
+        },
+      }
     );
-    return response.data.content;
+
+    const data = await response.json();
+    return data.content;
   } catch (error) {
     console.log(error);
     return {

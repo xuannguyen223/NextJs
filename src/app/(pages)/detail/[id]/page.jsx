@@ -1,5 +1,5 @@
 import React from "react";
-import { getProductById } from "../../action/page";
+import { getProductById } from "../../action/productServices";
 
 // viet function call API => server action
 

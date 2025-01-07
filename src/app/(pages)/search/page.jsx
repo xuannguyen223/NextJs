@@ -1,23 +1,10 @@
-import axios from "axios";
 import React from "react";
-import { getAllProducts } from "../action/page";
+import { getAllProducts } from "../action/productServices";
 import Link from "next/link";
 
 const page = async (props) => {
-  // const params = await props.searchParams;
-  // const test = await params;
-  // console.log("test: ", test);
-  // const keyword = test.keyword;
-  // console.log("keyword: ", keyword);
-
-  // const res = await getAllProducts(keyword);
-  // console.log("res: ", res);
-
   const keyword = props.searchParams.keyword || "";
-  console.log("keyword: ", keyword);
   const res = await getAllProducts(keyword);
-  console.log("res: ", res);
-
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
